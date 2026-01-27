@@ -1,9 +1,11 @@
 #include <raylib.h>
+#include <time.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 int main() 
 {
+    srand(time(0));
     int screenWidth = 800;
     int screenHeight = 600;
 
@@ -21,7 +23,7 @@ int main()
     Texture2D texture = LoadTextureFromImage(image);
     UnloadImage(image);
 
-    Color colorList[] = { WHITE, GREEN, BLUE, RED, PURPLE, YELLOW, ORANGE, SKYBLUE };
+    Color colorList[] = { WHITE, GREEN, BLUE, RED, PURPLE, YELLOW, ORANGE, SKYBLUE, GOLD, GRAY, LIGHTGRAY };
     Color scolor = WHITE;
 
     while(!WindowShouldClose())
@@ -44,8 +46,16 @@ int main()
             hit = true;
         }
 
-        if(hit)
-            scolor = colorList[ rand() % (sizeof(colorList) / sizeof(*colorList)) ];
+
+        if(hit) 
+        { 
+            Color color = scolor;
+            do 
+            { 
+                scolor = colorList[ rand() % (sizeof(colorList) / sizeof(*colorList)) ];
+            } while(ColorIsEqual(color, scolor));
+        }
+
 
         BeginDrawing();
         ClearBackground(BLACK);
