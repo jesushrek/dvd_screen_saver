@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "./asset/logo_data.h"
 #include <time.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -19,7 +20,7 @@ int main()
     InitWindow(screenWidth, screenHeight, "Dvd-Logo");
     SetTargetFPS(144);
 
-    Image image = LoadImage("asset/logo.png");
+    Image image = LoadImageFromMemory(".png", logo_png, logo_png_len);
     Texture2D texture = LoadTextureFromImage(image);
     UnloadImage(image);
 
